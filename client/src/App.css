@@ -1,0 +1,90 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.main {
+padding: 20px;
+}
+
+#home {
+  box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+  height: 800px;;
+}
+
+#stashPic {
+  display: flex;
+  width: 100%;
+}
+
+.info{
+  display: inline;
+  flex-direction: column;
+  justify-content: center; 
+  width: 100%;
+}
+
+#yardage, #width {
+  width: 100px;
+  display: inline-flex;
+  padding: 10px;
+  margin: 10px;
+}
+
+#yardageCol, #widthCol {
+  width: 100px;
+}
+
+ #checkbox {
+  padding-left: 30px;
+  margin: 20px;
+} 
+
+button:hover {
+  cursor: pointer;
+}
+
+.fabrics {
+  width: 700px;
+  height: 250;
+  border: 1px solid black;
+  margin: 10px;
+  display: flex;
+  padding: 10px
+}
+
+.fabrics h3 {
+  margin: 20px;
+}
+
+.card {
+  width: 400px;
+  background-color: lightgray;
+}
+
+.navbar-navbar-expand-lg-navbar-light-bg-light {
+  background-color: darkcyan;
+}
+
+#detailsForm {
+  display: inline-flex;
+  padding: 10px;
+
+}
+
+#detailsForm label {
+  font-weight: bold;
+  color:rgb(31, 59, 59);
+  padding: 10px;
+}
+
+#detailsForm p {
+  width: auto;
+}
+
+#details-scrap-checkbox {
+  padding: 10px;
+  margin-left: 10px;
+  margin-top: 10px;;
+}
