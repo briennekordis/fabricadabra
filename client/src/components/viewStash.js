@@ -1,7 +1,7 @@
 import '../App.css';
 import React, { useState, useEffect } from "react";
 import FabricDataService from "../services/fabricServices";
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, ModalHeader, ModalTitle, ModalBody } from "react-bootstrap";
 
 function ViewStash() {
     let details = {};
@@ -9,14 +9,12 @@ function ViewStash() {
     const [fabric, setFabric] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [show, setShow] = useState(false);
-    const [showModal, setShowModal] = useState(false);
+    const [detailsShow, setDetailsShow] = useState(false);
+    const [warningShow, setWarningShow] = useState(false);
     const [modalInfo, setModalInfo] = useState([]);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleCloseDetails = () => setDetailsShow(false);
+    const handleCloseWarning = () => setWarningShow(false);
     const widthFormat = new Intl.NumberFormat({maximumFractionDigits: 0});
-
-    const toggleTrueFalse = () => {setShowModal(handleShow);};
 
     // Get all fabric
     useEffect(() => {
@@ -41,7 +39,7 @@ function ViewStash() {
           const response = await FabricDataService.get(id);
           details = await response.data[0];
           setModalInfo(details);
-          toggleTrueFalse();
+          setDetailsShow(true);
           setError(null);
         } catch (err) {
           setError(err.message);
@@ -58,19 +56,41 @@ function ViewStash() {
     const deleteFabric = async (id) => {
       try {
         const response = await FabricDataService.remove(id);
-        setError(null);
+        console.log(response);
       } catch (err) {
         setError(err.message);
         setFabric(null);
       } finally {
         setLoading(false);
       }
-  }
 
-    
-    const ModalContent = () => {
+    }
+
+    const showWarning = () => {
+      setDetailsShow(false);
+      setWarningShow(true);
+    }
+
+    const WarningModal = () => {
       return (
-        <Modal show={show} onHide={handleClose}>
+        <Modal show={warningShow} onHide={handleCloseWarning}>
+          <Modal.Header closeButton>
+            <Modal.Title>Warning!</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p>Are you sure you want to delete {modalInfo.PatternDesc} {modalInfo.Color} {modalInfo.FabricType}?</p>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleCloseWarning}>Cancel</Button>
+            <Button variant="primary" onClick={deleteFabric}>Confirm</Button>
+          </Modal.Footer>
+        </Modal>
+      )
+    }
+    
+    const DetailsModal = () => {
+      return (
+        <Modal show={detailsShow} onHide={handleCloseDetails}>
             <Modal.Header closeButton>
                 <Modal.Title>Fabric Details</Modal.Title>
             </Modal.Header>
@@ -101,8 +121,8 @@ function ViewStash() {
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="primary">Edit</Button>
-                <Button variant="danger"onClick={deleteFabric}>Delete</Button>
-                <Button variant="secondary" onClick={handleClose}>Close</Button>
+                <Button variant="danger" onClick={showWarning}>Delete</Button>
+                <Button variant="secondary" onClick={handleCloseDetails}>Close</Button>
             </Modal.Footer>
         </Modal>
       );
@@ -146,7 +166,10 @@ function ViewStash() {
             </table>
         </div>
         <div>
-              {show ? <ModalContent content={details} /> : null}
+            {detailsShow ? <DetailsModal /> : null}
+        </div>
+        <div>
+            {warningShow ? <WarningModal /> : null}
         </div>
       </> 
     );

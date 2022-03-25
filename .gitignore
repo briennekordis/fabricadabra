@@ -24,3 +24,5 @@ yarn-error.log*
 
 # user added files
 db.config.js
+client/node_modules
+server/node_modules
