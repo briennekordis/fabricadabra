@@ -8,7 +8,10 @@ Fabricadabra
 - [Future Improvements](https://github.com/briennekordis/fabricadabra#future-improvements)
 
 ## Description & General Info
-This project is a personal project of the owner to organize their sizable fabric stash. 
+This project is a personal project of the owner to organize their sizable fabric stash.
+
+![fabHome](https://user-images.githubusercontent.com/87245718/160255826-a28f14a5-a10e-4361-b30a-aa05d009635d.png)
+
 
 ## Languages & Technologies
 - HTML
@@ -28,12 +31,19 @@ This application applies the CRUD (Create, Read, Update, Delete) methods to data
 
 - When a user clicks on any of the individual rows, a modal appears displaying more details about the data, with the options to edit or delete the object. 
 
-![addfabric Small](https://user-images.githubusercontent.com/87245718/160156030-7b5751f7-657c-4b9d-a66f-bf11f97f991a.jpeg)
+![fabricDetails](https://user-images.githubusercontent.com/87245718/160255810-e72d701d-3969-4f39-bd6a-8e985d96df67.png)
 
 
 - From the "Add to My Stash" page, the user is able to create a new fabric object that will be added to the database. 
 
-![modal Small](https://user-images.githubusercontent.com/87245718/160156091-3924989a-b101-44bf-b5d5-e093d5ef2f32.jpeg)
+![addFabric](https://user-images.githubusercontent.com/87245718/160255815-68fa1e31-803f-4d11-8f99-5c585b2107ee.png)
+
+- On the "Settings" page, there are collapsible components that display retrieved data from the database and allow users to view, edit, delete, and create new "settings" options (i.e. rows in data columns). 
+
+![settings](https://user-images.githubusercontent.com/87245718/160255859-2ce81eac-76c3-4dde-b9be-46175528785d.png)
+
+![settingModal](https://user-images.githubusercontent.com/87245718/160255865-991430ab-4a14-4cc4-ac96-47ef69158ba0.png)
+
 
 
 ## Future Improvements
@@ -44,6 +54,6 @@ This project is still in progress and has additional functionality planned, such
 - A "Stash Stats" page that will provide a summery of the user's data, such as how many total yards of fabric in their stash. 
 - A "Project Planner" that will allow users to plot out their project plans, assign fabrics to be used for different projects, 
 and mark projects as complete which will then deduct the amount of fabric used from the stash. 
-- A "Settings" page that will allow the users to customize the options for their inputs, such as the names of different fabric types, patterns, sources, ext. 
+
 
 
