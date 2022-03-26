@@ -1,6 +1,6 @@
 import '../App.css';
 import React from "react";
-import stashPic from "../images/stash.jpeg";
+import logo from "../images/logo.jpeg";
 
 function Home() {
     return (          
@@ -9,7 +9,7 @@ function Home() {
                       <h1>Welcome to Fabricadabra</h1>
                       <p className="lead">A magical place to keep a sewist's stash organized</p>
                       <div className="container">
-                          <img src={stashPic} id="stashPic"></img>
+                          <img src={logo} id="logo"></img>
                       </div>
                   </main>
           </body>

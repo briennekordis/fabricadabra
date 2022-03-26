@@ -8,7 +8,6 @@ import ViewStash from "./components/stash";
 import Home from "./components/home";
 import Settings from "./components/settings/settings";
 
-
 function App() {
 
     return (

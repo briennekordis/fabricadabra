@@ -9,9 +9,19 @@
 .typesContainer {
     columns: 4 auto;
     margin-left: 6px;
+    margin-top: 15px;
+    margin-bottom: 15px;;
     color:darkslategray;
 }
 
 a:hover {
   cursor: pointer;
+}
+
+.settingsDetails span{
+    font-weight: bold;
+}
+
+#addType {
+    float: right;
 }

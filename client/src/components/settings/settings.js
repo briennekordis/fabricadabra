@@ -9,6 +9,7 @@ import SourceSettings from "./sourceSettings";
 
 function Settings() {
     const [types, setTypes] = useState([]);
+    const [sources, setSources] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -27,6 +28,19 @@ function Settings() {
         };
         getTypes();
       
+        const getSources = () => {
+            try {
+            const response = SettingsDataService.getAllSources();
+            setSources(response.data);
+            setError(null);
+            } catch (err) {
+            setError(err.message);
+            setSources(null);
+            } finally {
+            setLoading(false);
+            }
+        };
+        getSources();
       }, []);
 
     return (
@@ -41,7 +55,7 @@ function Settings() {
             <div>
                   <Collapsible trigger="Fabric Sources">
                       <div>
-                          <SourceSettings />
+                          {/* <SourceSettings data={sources}/> */}
                       </div>
                   </Collapsible>
             </div>

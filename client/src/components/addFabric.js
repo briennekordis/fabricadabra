@@ -46,7 +46,6 @@ function AddFabric() {
             ProjectId: response.data.projectId
         });
         setSubmitted(true);
-        console.log(response.data);
       })
       .catch(e => {
         console.log(e);

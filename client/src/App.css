@@ -15,9 +15,10 @@ height: auto;;
   height: 800px;;
 }
 
-#stashPic {
-  display: flex;
-  width: 100%;
+#logo {
+  display: inline-flex;
+  width: 400px;
+  margin-left: 5px;
 }
 
 .info{
@@ -93,4 +94,13 @@ button:hover {
 
 .hidden {
   display: none;
+}
+
+#stashOps {
+  margin-bottom: 50px;
+  border: 1px solid gray;
+}
+
+#addFabricIcon {
+  float: right;
 }
