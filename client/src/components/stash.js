@@ -1,7 +1,7 @@
 import '../App.css';
 import React, { useState, useEffect } from "react";
 import FabricDataService from "../services/fabricServices";
-import { Modal, Button, ModalHeader, ModalTitle, ModalBody } from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
 
 function ViewStash() {
     let details = {};
@@ -67,19 +67,12 @@ function ViewStash() {
       } finally {
         setLoading(false);
       }
-      // FabricDataService.remove(id)
-      // .then(response => {
-      //   console.log(response.data);
-      // })
-      // .catch(e => {
-      //   console.log(e);
-      // });
-
     }
 
     const WarningModal = () => {
+      console.log(modalInfo.FabricId);
       return (
-        <Modal show={warningShow} onHide={handleCloseWarning}>
+        <Modal show={warningShow} onHide={function(){handleCloseWarning()}}>
           <Modal.Header closeButton>
             <Modal.Title>Warning!</Modal.Title>
           </Modal.Header>
@@ -87,11 +80,11 @@ function ViewStash() {
             <p>Are you sure you want to delete {modalInfo.PatternDesc} {modalInfo.Color} {modalInfo.FabricType}?</p>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleCloseWarning}>Cancel</Button>
-            <Button variant="primary" onClick={deleteFabric}>Confirm</Button>
+            <Button variant="secondary" onClick={function(){handleCloseWarning()}}>Cancel</Button>
+            <Button variant="primary" onClick={function(){deleteFabric(modalInfo.FabricId)}}>Confirm</Button>
           </Modal.Footer>
         </Modal>
-      )
+      );
     }
 
     const showEdit = () => {
@@ -114,7 +107,7 @@ function ViewStash() {
 
     const EditModal = () => {
       return (
-        <Modal show={editShow} onHide={handleCloseEdit}>
+        <Modal show={editShow} onHide={function(){handleCloseEdit()}}>
           <Modal.Header closeButton>
             <Modal.Title>Edit Fabric</Modal.Title>
           </Modal.Header>
@@ -144,16 +137,16 @@ function ViewStash() {
                 </form>        
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleCloseEdit}>Cancel</Button>
-            <Button variant="primary" onClick={editFabric}>Save changes</Button>
+            <Button variant="secondary" onClick={function(){handleCloseEdit()}}>Cancel</Button>
+            <Button variant="primary" onClick={function(){editFabric()}}>Save changes</Button>
           </Modal.Footer>
         </Modal>
-      )
+      );
     }
 
     const DetailsModal = () => {
       return (
-        <Modal show={detailsShow} onHide={handleCloseDetails}>
+        <Modal show={detailsShow} onHide={function(){handleCloseDetails()}}>
             <Modal.Header closeButton>
                 <Modal.Title>Fabric Details</Modal.Title>
             </Modal.Header>
@@ -183,9 +176,9 @@ function ViewStash() {
                 </form>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="primary" onClick={showEdit}>Edit</Button>
-                <Button variant="danger" onClick={showWarning}>Delete</Button>
-                <Button variant="secondary" onClick={handleCloseDetails}>Close</Button>
+                <Button variant="primary" onClick={function(){showEdit()}}>Edit</Button>
+                <Button variant="danger" onClick={function(){showWarning()}}>Delete</Button>
+                <Button variant="secondary" onClick={function(){handleCloseDetails()}}>Close</Button>
             </Modal.Footer>
         </Modal>
       );

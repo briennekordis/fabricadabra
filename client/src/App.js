@@ -6,8 +6,7 @@ import NavBar from "./components/navbar";
 import AddFabric from "./components/addFabric";
 import ViewStash from "./components/stash";
 import Home from "./components/home";
-import Settings from "./components/settings";
-const UserContext = React.createContext(null);
+import Settings from "./components/settings/settings";
 
 
 function App() {

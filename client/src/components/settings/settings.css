@@ -11,3 +11,7 @@
     margin-left: 6px;
     color:darkslategray;
 }
+
+a:hover {
+  cursor: pointer;
+}
