@@ -4,22 +4,22 @@ import SettingsDataService from "../../services/settingServices";
 import { React, useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 
-
-const SourceSettings = (props) => {
+const PatternSettings = (props) => {
     let details = {};
-    const [sources, setSources] = useState([]);
+    const [patterns, setPatterns] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [modalInfo, setModalInfo] = useState([]);
     const [detailsShow, setDetailsShow] = useState(false);
     const [warningShow, setWarningShow] = useState(false);
-    const [modalInfo, setModalInfo] = useState([]);
     const handleCloseDetails = () => setDetailsShow(false);
     const handleCloseWarning = () => setWarningShow(false);
 
-    // Get sources by id
+
+    // Get pattern by id
     const showDetails = async (id) => {
         try {
-          const response = await SettingsDataService.getSource(id);
+          const response = await SettingsDataService.getPattern(id);
           details = await response.data[0];
           setModalInfo(details);
           setDetailsShow(true);
@@ -31,12 +31,12 @@ const SourceSettings = (props) => {
           setLoading(false);
         }
     }
-  
-    function FabricSources({source: {FabricSourceId, SourceName}}) {
+
+    function FabricPatterns({pattern: {PatternId, PatternDesc}}) {
         return (
-            <div>
-                <a onClick={function(){showDetails(FabricSourceId)}}>{SourceName}</a>
-            </div>
+          <div>
+              <a onClick={function(){showDetails(PatternId)}}>{PatternDesc}</a>
+          </div>
         );
     }
 
@@ -47,26 +47,26 @@ const SourceSettings = (props) => {
                   <Modal.Title>Details</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                      <div className="settingsDetails">
-                          <p><span>Fabric Source: </span>{modalInfo.SourceName}</p>
-                        </div>
+                    <div className="settingsDetails">
+                        <p><span>Fabric Pattern:</span> {modalInfo.PatternDesc}</p>
+                      </div>
               </Modal.Body>
               <Modal.Footer>
-                     <Button id="deleteButton" onClick={function(){showWarning()}}>Delete</Button>
-                     <Button id="closeButton" onClick={function(){handleCloseDetails()}}>Close</Button>
+                  <Button id="deleteButton" onClick={function(){showWarning()}}>Delete</Button>
+                  <Button id="closeButton" onClick={function(){handleCloseDetails()}}>Close</Button>
               </Modal.Footer>
           </Modal>
         );
       };
-
-    // Delete source by id
-    const deleteSource = async (id) => {
+  
+    // Delete pattern by id
+    const deletePattern = async (id) => {
         try {
-          const response = await SettingsDataService.removeSource(id);
+          const response = await SettingsDataService.removePattern(id);
           console.log(response);
         } catch (err) {
           setError(err.message);
-          setSources(null);
+          setPatterns(null);
         } finally {
           setLoading(false);
         }
@@ -79,23 +79,24 @@ const SourceSettings = (props) => {
     }
 
     const WarningModal = () => {
-      console.log(modalInfo.FabricSourceId);
+      console.log(modalInfo.PatternId);
       return (
         <Modal show={warningShow} onHide={function(){handleCloseWarning()}}>
           <Modal.Header closeButton>
             <Modal.Title>Warning!</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <p>Are you sure you want to delete {modalInfo.SourceName}?</p>
+            <p>Are you sure you want to delete {modalInfo.PatternDesc}?</p>
           </Modal.Body>
           <Modal.Footer>
             <Button id="closeButton" onClick={function(){handleCloseWarning()}}>Cancel</Button>
-            <Button id="confirmButton" onClick={function(){deleteSource(modalInfo.FabricSourceId)}}>Confirm</Button>
+            <Button id="confirmButton" onClick={function(){deletePattern(modalInfo.PatternId)}}>Confirm</Button>
           </Modal.Footer>
         </Modal>
       );
     }
 
+  
 
     return (
         <div>
@@ -103,18 +104,19 @@ const SourceSettings = (props) => {
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-plus-square-fill" viewBox="0 0 16 16" type="button"> 
                     <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/>
                 </svg>
-            </div>
-            <div className="sourcesContainer">
-                {props.data.map(source => <FabricSources key={FabricSources.FabricSourceId} source={source}/>)}
-            </div>
-            <div>
-                {detailsShow ? <DetailsModal /> : null}           
+             </div>
+            <div className="patternsContainer">
+                {props.data.map(pattern => <FabricPatterns key={FabricPatterns.PatternId} pattern={pattern}/>)}
             </div>
             <div>
+                {detailsShow ? <DetailsModal /> : null}
+          </div>
+          <div>
                 {warningShow ? <WarningModal /> : null}
-            </div>
+          </div>
         </div>
-    );
+      
+      );    
 }
 
-export default SourceSettings;
+export default PatternSettings;

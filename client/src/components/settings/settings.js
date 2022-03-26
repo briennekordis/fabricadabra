@@ -2,22 +2,23 @@ import "../../App.css";
 import "./settings.css";
 import { React, useState, useEffect } from "react";
 import SettingsDataService from "../../services/settingServices";
-import { Button } from "react-bootstrap";
 import Collapsible from "react-collapsible";
-import TypesSettings from "./typesSettings";
+import TypeSettings from "./typeSettings";
 import SourceSettings from "./sourceSettings";
+import PatternSettings from "./patternsSettings";
 
 function Settings() {
     const [types, setTypes] = useState([]);
     const [sources, setSources] = useState([]);
+    const [patterns, setPatterns] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
         const getTypes = async () => {
           try {
-            const response = await SettingsDataService.getAllTypes();
-            setTypes(response.data);
+            const typeResponse = await SettingsDataService.getAllTypes();
+            setTypes(typeResponse.data);
             setError(null);
           } catch (err) {
             setError(err.message);
@@ -27,20 +28,35 @@ function Settings() {
           }
         };
         getTypes();
-      
-        const getSources = () => {
+
+        const getSources = async () => {
             try {
-            const response = SettingsDataService.getAllSources();
-            setSources(response.data);
-            setError(null);
+              const sourceResponse = await SettingsDataService.getAllSources();
+              setSources(sourceResponse.data);
+              setError(null);
             } catch (err) {
-            setError(err.message);
-            setSources(null);
+              setError(err.message);
+              setSources(null);
             } finally {
-            setLoading(false);
+              setLoading(false);
             }
         };
         getSources();
+
+        const getPatterns = async () => {
+          try {
+            const patternResponse = await SettingsDataService.getAllPatterns();
+            setPatterns(patternResponse.data);
+            setError(null);
+          } catch (err) {
+            setError(err.message);
+            setPatterns(null);
+          } finally {
+            setLoading(false);
+          }
+      };
+      getPatterns();
+
       }, []);
 
     return (
@@ -48,21 +64,21 @@ function Settings() {
             <div>
                   <Collapsible trigger="Fabric Types" id="typesTrigger">
                       <div>
-                            <TypesSettings data={types}/>
+                            <TypeSettings data={types}/>
                       </div>
                   </Collapsible>
             </div>
             <div>
                   <Collapsible trigger="Fabric Sources">
                       <div>
-                          {/* <SourceSettings data={sources}/> */}
+                          <SourceSettings data={sources}/>
                       </div>
                   </Collapsible>
             </div>
             <div className="patternSettings">
                   <Collapsible trigger="Fabric Patterns">
                       <div>
-  
+                          <PatternSettings data={patterns}/>
                       </div>
                   </Collapsible>
             </div>

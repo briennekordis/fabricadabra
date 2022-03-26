@@ -21,13 +21,6 @@ height: auto;;
   margin-left: 5px;
 }
 
-.info{
-  display: inline;
-  flex-direction: column;
-  justify-content: center; 
-  width: 100%;
-}
-
 #yardage, #width {
   width: 100px;
   display: inline-flex;
@@ -39,6 +32,11 @@ height: auto;;
   width: 100px;
 }
 
+.form-check-input:checked {
+  background-color: rgba(132, 140, 182, 0.678) !important;
+  border-color:rgba(132, 140, 182, 0.678) !important;
+}
+
  #checkbox {
   padding-left: 30px;
   margin: 20px;
@@ -48,38 +46,18 @@ button:hover {
   cursor: pointer;
 }
 
-.fabrics {
-  width: 700px;
-  height: 250;
-  border: 1px solid black;
-  margin: 10px;
-  display: flex;
-  padding: 10px
-}
-
-.fabrics h3 {
-  margin: 20px;
-}
-
 .card {
   width: 400px;
   background-color: lightgray;
 }
 
-.navbar-navbar-expand-lg-navbar-light-bg-light {
-  background-color: darkcyan;
-}
-
 #detailsForm {
-  display: inline-flex;
   padding: 10px;
-
+  columns: 2;
 }
 
-#detailsForm label {
+#detailsForm span {
   font-weight: bold;
-  color:rgb(31, 59, 59);
-  padding: 10px;
 }
 
 #detailsForm p {
@@ -89,7 +67,7 @@ button:hover {
 #details-scrap-checkbox {
   padding: 10px;
   margin-left: 10px;
-  margin-top: 10px;;
+  margin-top: 2px;;
 }
 
 .hidden {
@@ -101,6 +79,25 @@ button:hover {
   border: 1px solid gray;
 }
 
+#stashTable {
+  margin: 10px;
+}
+
 #addFabricIcon {
   float: right;
+}
+
+#deleteButton {
+  background-color: rgb(11, 6, 29);
+  border-color: rgb(11, 6, 29);
+}
+
+#closeButton{
+  background-color: rgb(125, 125, 136);
+  border-color: rgb(125, 125, 136);
+}
+
+#editButton, #confirmButton {
+  background-color: rgb(106, 106, 175);
+  border-color: rgb(106, 106, 175);
 }

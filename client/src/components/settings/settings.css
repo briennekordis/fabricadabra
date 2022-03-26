@@ -14,6 +14,22 @@
     color:darkslategray;
 }
 
+.sourcesContainer {
+    columns: 3 auto;
+    margin-left: 6px;
+    margin-top: 15px;
+    margin-bottom: 15px;;
+    color:darkslategray;
+}
+
+.patternsContainer {
+    columns: 3 auto;
+    margin-left: 6px;
+    margin-top: 15px;
+    margin-bottom: 15px;;
+    color:darkslategray;
+}
+
 a:hover {
   cursor: pointer;
 }
@@ -22,6 +38,6 @@ a:hover {
     font-weight: bold;
 }
 
-#addType {
+#settingsAddIcon {
     float: right;
 }

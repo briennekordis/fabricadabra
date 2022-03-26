@@ -91,7 +91,7 @@ function AddFabric() {
                         <label className="form-check-label">This fabric is a scrap.</label>
                     </div>
                     <br />
-                    <button type="button" className="btn btn-info" onClick={saveFabric}>Add Fabric</button>
+                    <button type="button" id="confirmButton" className="btn btn-info" onClick={saveFabric}>Add Fabric</button>
                 </form>
                     </> 
                     )}

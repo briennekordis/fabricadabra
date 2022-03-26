@@ -4,7 +4,7 @@ import SettingsDataService from "../../services/settingServices";
 import { React, useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 
-const TypesSettings = (props) => {
+const TypeSettings = (props) => {
     let details = {};
     const [types, setTypes] = useState([]);
     const [type, setType] = useState({});
@@ -60,9 +60,9 @@ const TypesSettings = (props) => {
                     </div>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="primary" onClick={function(){showEdit()}}>Edit</Button>
-                <Button variant="danger" onClick={function(){showWarning()}}>Delete</Button>
-                <Button variant="secondary" onClick={function(){handleCloseDetails()}}>Close</Button>
+                <Button id="editButton" onClick={function(){showEdit()}}>Edit</Button>
+                <Button id="deleteButton" onClick={function(){showWarning()}}>Delete</Button>
+                <Button id="closeButton" onClick={function(){handleCloseDetails()}}>Close</Button>
             </Modal.Footer>
         </Modal>
       );
@@ -95,11 +95,11 @@ const TypesSettings = (props) => {
             <Modal.Title>Warning!</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <p>Are you sure you want to delete {modalInfo.PatternDesc} {modalInfo.Color} {modalInfo.FabricType}?</p>
+            <p>Are you sure you want to delete {modalInfo.FabricType}?</p>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={function(){handleCloseWarning()}}>Cancel</Button>
-            <Button variant="primary" onClick={function(){deleteType(modalInfo.FabricTypeId)}}>Confirm</Button>
+            <Button id="closeButton" onClick={function(){handleCloseWarning()}}>Cancel</Button>
+            <Button id="confirmButton" onClick={function(){deleteType(modalInfo.FabricTypeId)}}>Confirm</Button>
           </Modal.Footer>
         </Modal>
       );
@@ -138,8 +138,8 @@ const TypesSettings = (props) => {
                 </form>        
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={function(){handleCloseEdit()}}>Cancel</Button>
-            <Button variant="primary" onClick={function(){editType()}}>Save changes</Button>
+            <Button id="closeButton" onClick={function(){handleCloseEdit()}}>Cancel</Button>
+            <Button id="confirmButton" onClick={function(){editType()}}>Save changes</Button>
           </Modal.Footer>
         </Modal>
       );
@@ -180,8 +180,8 @@ const TypesSettings = (props) => {
                 </form>        
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={function(){handleCloseAdd()}}>Cancel</Button>
-            <Button variant="primary" onClick={function(){addType()}}>Add Type</Button>
+            <Button id="closeButton" onClick={function(){handleCloseAdd()}}>Cancel</Button>
+            <Button id="confirmButton" onClick={function(){addType()}}>Add Type</Button>
           </Modal.Footer>
         </Modal>
       );
@@ -191,7 +191,7 @@ const TypesSettings = (props) => {
 
   return (
     <div>
-        <div id="addType">
+        <div id="settingsAddIcon">
             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-plus-square-fill" viewBox="0 0 16 16" type="button" onClick={function(){showAdd()}}> 
                 <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/>
             </svg>
@@ -216,5 +216,5 @@ const TypesSettings = (props) => {
   );
 };
 
-export default TypesSettings;
+export default TypeSettings;
 

@@ -19,19 +19,36 @@ const removeType = id => {
 
 //Fabric sources
 const getAllSources = () => {
-  return http.get("/fabricTypes");
+  return http.get("/fabricSources");
 };
 const getSource = id => {
-  return http.get(`/fabricTypes/${id}`);
+  return http.get(`/fabricSources/${id}`);
 };
 const createSource = data => {
-  return http.post("/fabricTypes", data);
+  return http.post("/fabricSources", data);
 };
 const updateSource = (id, data) => {
-  return http.put(`/fabricTypes/${id}`, data);
+  return http.put(`/fabricSources/${id}`, data);
 };
 const removeSource = id => {
-  return http.delete(`/fabricTypes/${id}`);
+  return http.delete(`/fabricSources/${id}`);
+};
+
+//Fabric patterns
+const getAllPatterns = () => {
+  return http.get("/fabricpatterns");
+};
+const getPattern = id => {
+  return http.get(`/fabricpatterns/${id}`);
+};
+const createPattern = data => {
+  return http.post("/fabricpatterns", data);
+};
+const updatePattern = (id, data) => {
+  return http.put(`/fabricpatterns/${id}`, data);
+};
+const removePattern = id => {
+  return http.delete(`/fabricpatterns/${id}`);
 };
 
 export default {
@@ -45,4 +62,9 @@ export default {
   createSource,
   updateSource,
   removeSource,
+  getAllPatterns,
+  getPattern,
+  createPattern,
+  updatePattern,
+  removePattern
 };

@@ -20,7 +20,8 @@ FabricSource.create = (newFabricSource, result) => {
   FabricSource.getAll = (result) => {
     let query = 
         "SELECT * " +
-        "FROM FabricSources;" 
+        "FROM FabricSources " +
+        "ORDER BY SourceName;" 
     sql.query(query, (err, res) => {
         if (err) {
             console.log("Error: ", err);

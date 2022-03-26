@@ -83,8 +83,8 @@ function ViewStash() {
             <p>Are you sure you want to delete {modalInfo.PatternDesc} {modalInfo.Color} {modalInfo.FabricType}?</p>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={function(){handleCloseWarning()}}>Cancel</Button>
-            <Button variant="primary" onClick={function(){deleteFabric(modalInfo.FabricId)}}>Confirm</Button>
+            <Button id="closeButton" onClick={function(){handleCloseWarning()}}>Cancel</Button>
+            <Button id="confirmButton" onClick={function(){deleteFabric(modalInfo.FabricId)}}>Confirm</Button>
           </Modal.Footer>
         </Modal>
       );
@@ -141,8 +141,8 @@ function ViewStash() {
                 </form>        
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={function(){handleCloseEdit()}}>Cancel</Button>
-            <Button variant="primary" onClick={function(){editFabric()}}>Save changes</Button>
+            <Button id="closeButton" onClick={function(){handleCloseEdit()}}>Cancel</Button>
+            <Button id="confirmButton" onClick={function(){editFabric()}}>Save changes</Button>
           </Modal.Footer>
         </Modal>
       );
@@ -150,39 +150,28 @@ function ViewStash() {
 
     const DetailsModal = () => {
       return (
-        <Modal show={detailsShow} onHide={function(){handleCloseDetails()}}>
+        <Modal show={detailsShow} onHide={function(){handleCloseDetails()}} id="stashDetailsModal">
             <Modal.Header closeButton>
                 <Modal.Title>Fabric Details</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <form id="detailsForm">
                     <div className="form-group">
-                        <label>Fabric Type:</label>
-                        <p className="form-control">{modalInfo.FabricType}</p>
-                        <label>Color:</label>
-                        <p className="form-control">{modalInfo.Color}</p>
-                        <label>Pattern:</label>
-                        <p className="form-control">{modalInfo.PatternDesc}</p>
-                        <label>Yardage:</label>
-                        <p className="form-control" id="yardage">{modalInfo.Yardage}</p>
-                        <label>Width:</label>
-                        <p className="form-control" id="width">{widthFormat.format(modalInfo.Width)}"</p>
-                        <br />
-                        <label>Source:</label>
-                        <p className="form-control">{modalInfo.SourceName}</p>
-                        <label>Intended Project:</label>
-                        <p className="form-control">{modalInfo.ProjectName}</p>
-                        <div className="form-check">
-                            <label>Scrap:</label>
-                            <input type="checkbox" readOnly className="form-check-input" id="details-scrap-checkbox" checked={modalInfo.ScrapStatus}/>
-                        </div>
+                        <p><span>Fabric Type: </span>{modalInfo.FabricType}</p>
+                        <p><span>Color: </span>{modalInfo.Color}</p>
+                        <p><span>Pattern: </span>{modalInfo.PatternDesc}</p>
+                        <p><span>Yardage: </span> {modalInfo.Yardage}</p>
+                        <p><span>Width: </span>{widthFormat.format(modalInfo.Width)}"</p>
+                        <p><span>Source: </span>{modalInfo.SourceName}</p>
+                        <p><span>Intended Project: </span>{modalInfo.ProjectName}</p>
+                        <p><span>Scrap: </span><input type="checkbox" readOnly className="form-check-input" id="details-scrap-checkbox" checked={modalInfo.ScrapStatus}/></p>
                       </div>
                 </form>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="primary" onClick={function(){showEdit()}}>Edit</Button>
-                <Button variant="danger" onClick={function(){showWarning()}}>Delete</Button>
-                <Button variant="secondary" onClick={function(){handleCloseDetails()}}>Close</Button>
+                <Button id="editButton" onClick={function(){showEdit()}}>Edit</Button>
+                <Button id="deleteButton" onClick={function(){showWarning()}}>Delete</Button>
+                <Button id="closeButton" onClick={function(){handleCloseDetails()}}>Close</Button>
             </Modal.Footer>
         </Modal>
       );
