@@ -26,7 +26,8 @@ This project is a personal project of the owner to organize their sizable fabric
 This application applies the CRUD (Create, Read, Update, Delete) methods to data that stores information about different fabrics, such as color and pattern. 
 - On the "View My Stash" page, the user is able to see a table of data (fabrics) that has been retrieved from the database. 
 
-![viewstash Small](https://user-images.githubusercontent.com/87245718/160155944-df4448f7-a5c4-4aa5-9279-e2ee70bfd738.jpeg)
+![viewStash](https://user-images.githubusercontent.com/87245718/160255940-4f492aac-2f66-464e-a8d4-3fff07dfc451.png)
+
 
 
 - When a user clicks on any of the individual rows, a modal appears displaying more details about the data, with the options to edit or delete the object. 
