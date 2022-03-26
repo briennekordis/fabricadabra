@@ -11,9 +11,11 @@ function ViewStash() {
     const [error, setError] = useState(null);
     const [detailsShow, setDetailsShow] = useState(false);
     const [warningShow, setWarningShow] = useState(false);
+    const [editShow, setEditShow] = useState(false);
     const [modalInfo, setModalInfo] = useState([]);
     const handleCloseDetails = () => setDetailsShow(false);
     const handleCloseWarning = () => setWarningShow(false);
+    const handleCloseEdit = () => setEditShow(false);
     const widthFormat = new Intl.NumberFormat({maximumFractionDigits: 0});
 
     // Get all fabric
@@ -48,9 +50,11 @@ function ViewStash() {
           setLoading(false);
         }
     }
-    
-    //Update fabric by id
 
+    const showWarning = () => {
+      setDetailsShow(false);
+      setWarningShow(true);
+    }
 
     //Delete fabric by id
     const deleteFabric = async (id) => {
@@ -63,12 +67,14 @@ function ViewStash() {
       } finally {
         setLoading(false);
       }
+      // FabricDataService.remove(id)
+      // .then(response => {
+      //   console.log(response.data);
+      // })
+      // .catch(e => {
+      //   console.log(e);
+      // });
 
-    }
-
-    const showWarning = () => {
-      setDetailsShow(false);
-      setWarningShow(true);
     }
 
     const WarningModal = () => {
@@ -87,7 +93,64 @@ function ViewStash() {
         </Modal>
       )
     }
-    
+
+    const showEdit = () => {
+      setDetailsShow(false);
+      setEditShow(true);
+    }
+
+    //Update fabric by id
+    const editFabric = async (id) => {
+      try {
+        const response = await FabricDataService.update(id);
+        console.log(response);
+      } catch (err) {
+        setError(err.message);
+        setFabric(null);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    const EditModal = () => {
+      return (
+        <Modal show={editShow} onHide={handleCloseEdit}>
+          <Modal.Header closeButton>
+            <Modal.Title>Edit Fabric</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+              <form id="detailsForm">
+                  <div className="form-group">
+                      <label>Fabric Type:</label>
+                      <input className="form-control"/>
+                      <label>Color:</label>
+                      <input className="form-control"/>
+                      <label>Pattern:</label>
+                      <input className="form-control"/>
+                      <label>Yardage:</label>
+                      <input className="form-control" id="yardage"/>
+                      <label>Width:</label>
+                      <input className="form-control" id="width"/>
+                      <br />
+                      <label>Source:</label>
+                      <input className="form-control"/>
+                      <label>Intended Project:</label>
+                      <input className="form-control"/>
+                      <div className="form-check">
+                          <label>Scrap:</label>
+                          <input type="checkbox" className="form-check-input" id="details-scrap-checkbox" checked={modalInfo.ScrapStatus}/>
+                      </div>
+                    </div>
+                </form>        
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleCloseEdit}>Cancel</Button>
+            <Button variant="primary" onClick={editFabric}>Save changes</Button>
+          </Modal.Footer>
+        </Modal>
+      )
+    }
+
     const DetailsModal = () => {
       return (
         <Modal show={detailsShow} onHide={handleCloseDetails}>
@@ -120,7 +183,7 @@ function ViewStash() {
                 </form>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="primary">Edit</Button>
+                <Button variant="primary" onClick={showEdit}>Edit</Button>
                 <Button variant="danger" onClick={showWarning}>Delete</Button>
                 <Button variant="secondary" onClick={handleCloseDetails}>Close</Button>
             </Modal.Footer>
@@ -137,9 +200,6 @@ function ViewStash() {
             <td>{PatternDesc}</td>
             <td className="text-end">{Yardage}</td>
             <td className="text-end">{widthFormat.format(Width)}"</td>
-            {/* <td>{SourceName}</td>
-            <td>{ProjectName}</td> */}
-            {/* <td className="text-center"><input type="checkbox" readOnly checked={ScrapStatus}></input></td> */}
           </tr>
         );
       }
@@ -155,9 +215,6 @@ function ViewStash() {
                         <th scope="col">Pattern</th>
                         <th scope="col" id="yardageCol" className="text-end">Yardage</th>
                         <th scope="col" id="widthCol" className="text-end">Width</th>
-                        {/* <th scope="col">Source</th>
-                        <th scope="col">Intended Project</th> */}
-                        {/* <th scope="col">Scrap Status</th> */}
                     </tr>
                   </thead>
                   <tbody>
@@ -170,6 +227,9 @@ function ViewStash() {
         </div>
         <div>
             {warningShow ? <WarningModal /> : null}
+        </div>
+        <div>
+            {editShow ? <EditModal /> : null}
         </div>
       </> 
     );

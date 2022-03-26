@@ -1,0 +1,13 @@
+.Collapsible {
+    border: 2px, solid, black;
+}
+
+.Collapsible span {
+    font-weight: bold;
+}
+
+.typesContainer {
+    columns: 4 auto;
+    margin-left: 6px;
+    color:darkslategray;
+}

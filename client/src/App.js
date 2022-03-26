@@ -4,8 +4,9 @@ import { Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavBar from "./components/navbar";
 import AddFabric from "./components/addFabric";
-import ViewStash from "./components/viewStash";
+import ViewStash from "./components/stash";
 import Home from "./components/home";
+import Settings from "./components/settings";
 const UserContext = React.createContext(null);
 
 
@@ -21,24 +22,10 @@ function App() {
                     <Route exact path="/" element={<Home />} />
                     <Route exact path="/fabrics" element={<ViewStash />} />
                     <Route exact path="/add" element={<AddFabric />} />
-                    {/* <Route path="/fabrics/:id" component={Tutorial} /> */}
+                    <Route exact path="/settings" element={<Settings />} />
                 </Routes>
             </div>
         </div>
-
-
-
-      // <HashRouter>
-      //   <div>
-      //     <NavBar />
-      //     <div className="container" style={{padding: "20px"}}>
-      //       <Routes>
-      //           <Route path="/createFabric/" element={<AddFabric/>}/>
-      //           <Route path="/viewStash/" element={<ViewStash/>}/>
-      //       </Routes>
-      //     </div>
-      //   </div>
-      // </HashRouter>
     );
   }
 

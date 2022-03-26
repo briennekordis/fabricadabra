@@ -20,7 +20,9 @@ FabricType.create = (newFabricType, result) => {
   FabricType.getAll = (result) => {
     let query = 
         "SELECT * " +
-        "FROM FabricTypes;" 
+        "FROM FabricTypes " +
+        "WHERE FabricTypeId <> 1 " +
+        "ORDER BY FabricType;" 
     sql.query(query, (err, res) => {
         if (err) {
             console.log("Error: ", err);
