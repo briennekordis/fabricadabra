@@ -76,7 +76,6 @@ button:hover {
 
 #stashOps {
   margin-bottom: 50px;
-  border: 1px solid gray;
 }
 
 #stashTable {
@@ -100,4 +99,5 @@ button:hover {
 #editButton, #confirmButton {
   background-color: rgb(106, 106, 175);
   border-color: rgb(106, 106, 175);
+  color: white;
 }

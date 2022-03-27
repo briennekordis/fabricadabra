@@ -1,7 +1,7 @@
 import '../App.css';
 import React, { useState, useEffect } from "react";
-import FabricDataService from "../services/fabricServices";
 import { Modal, Button } from "react-bootstrap";
+import FabricDataService from "../services/fabricServices";
 
 function ViewStash() {
     let details = {};
@@ -13,27 +13,37 @@ function ViewStash() {
     const [warningShow, setWarningShow] = useState(false);
     const [editShow, setEditShow] = useState(false);
     const [modalInfo, setModalInfo] = useState([]);
-    const handleCloseDetails = () => setDetailsShow(false);
-    const handleCloseWarning = () => setWarningShow(false);
-    const handleCloseEdit = () => setEditShow(false);
     const widthFormat = new Intl.NumberFormat({maximumFractionDigits: 0});
 
-    // Get all fabric
     useEffect(() => {
-      const getStash = async () => {
-        try {
-          const response = await FabricDataService.getAll();
-          setStash(response.data);
-          setError(null);
-        } catch (err) {
-          setError(err.message);
-          setStash(null);
-        } finally {
-          setLoading(false);
-        }
-      };
       getStash();
-    }, []);
+    },[]);
+  
+    const handleCloseDetails = () => {
+      setDetailsShow(false);
+    }
+    const handleCloseWarning = () => {
+      setWarningShow(false);
+      getStash();
+    }
+    const handleCloseEdit = () => {
+      setEditShow(false);
+      getStash();
+    }
+
+    // Get all fabric
+    const getStash = async () => {
+      try {
+        const response = await FabricDataService.getAll();
+        setStash(response.data);
+        setError(null);
+      } catch (err) {
+        setError(err.message);
+        setStash(null);
+      } finally {
+        setLoading(false);
+      }
+    };
 
     // Get fabric by id
     const showDetails = async (id) => {
@@ -50,8 +60,6 @@ function ViewStash() {
           setLoading(false);
         }
     }
-
-
 
     //Delete fabric by id
     const deleteFabric = async (id) => {
@@ -89,7 +97,6 @@ function ViewStash() {
         </Modal>
       );
     }
-
 
     //Update fabric by id
     const editFabric = async (id) => {
@@ -211,7 +218,7 @@ function ViewStash() {
                     </tr>
                   </thead>
                   <tbody>
-                    {stash.map(fabric => <Fabric key={Fabric.FabricId} fabric={fabric} />)}
+                    {stash.map(fabric => <Fabric key={fabric.FabricId} fabric={fabric} />)}
                   </tbody>
             </table>
         </div>
@@ -227,6 +234,5 @@ function ViewStash() {
       </> 
     );
   }
-
 
 export default ViewStash;
