@@ -49,8 +49,6 @@ This application applies the CRUD (Create, Read, Update, Delete) methods to data
 
 ## Future Improvements
 This project is still in progress and has additional functionality planned, such as:
-- Currently, the input fields of the "Add to My Stash" page are based on the coresponding numerical id's of the columns in the database table.
- However, this will be improved by binding the options so that the user will have a drop downlist to choose the inputs. 
 - On the "View My Stash" page, search bars and filters will be added to improve the user's ability to sort through their stash.
 - A "Stash Stats" page that will provide a summery of the user's data, such as how many total yards of fabric in their stash. 
 - A "Project Planner" that will allow users to plot out their project plans, assign fabrics to be used for different projects, 
