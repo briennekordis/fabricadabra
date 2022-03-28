@@ -24,7 +24,6 @@ const PatternSettings = (props) => {
   }
   const handleCloseEdit = () => {
     setEditShow(false);
-    setResponseShow(true);
   }
   const handleCloseAdd = () => {
     setAddShow(false);
@@ -114,9 +113,9 @@ const PatternSettings = (props) => {
   }
 
   // Update pattern by id
-  const editPattern = async (id, newPattern) => {
+  const editPattern = async (id, modPattern) => {
     try {
-      const response = await SettingsDataService.updatePattern(id, { "PatternDesc": newPattern });
+      const response = await SettingsDataService.updatePattern(id, { PatternDesc: modPattern });
       console.log(response.data.message);
       handleCloseEdit();
     } catch (err) {

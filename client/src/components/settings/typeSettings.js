@@ -81,13 +81,13 @@ const TypeSettings = (props) => {
   const deleteType = async (id) => {
     try {
       const response = await SettingsDataService.removeType(id);
+      handleCloseWarning();
     } catch (err) {
       setError(err.message);
       setTypes(null);
     } finally {
       setLoading(false);
     }
-    handleCloseWarning();
   }
 
   const showWarning = () => {
@@ -114,9 +114,9 @@ const TypeSettings = (props) => {
   }
 
   // Update by id
-  const editType = async (id, newType) => {
+  const editType = async (id, modType) => {
     try {
-      const response = await SettingsDataService.updateType(id, { "FabricType": newType });
+      const response = await SettingsDataService.updateType(id, { FabricType: modType });
       handleCloseEdit();
     } catch (err) {
       setError(err.message);
@@ -169,7 +169,6 @@ const TypeSettings = (props) => {
     } finally {
       setLoading(false);
     }
-    setResponseShow(true);
   }
 
   const AddModal = () => {

@@ -25,7 +25,6 @@ const SourceSettings = (props) => {
   }
   const handleCloseEdit = () => {
     setEditShow(false);
-    setResponseShow(true);
   }
   const handleCloseAdd = () => {
     setAddShow(false);
@@ -118,9 +117,9 @@ const SourceSettings = (props) => {
 
 
   // Update source by id
-  const editSource = async (id, newSource) => {
+  const editSource = async (id, modSource) => {
     try {
-      const response = await SettingsDataService.updateSource(id, { "SourceName": newSource });
+      const response = await SettingsDataService.updateSource(id, { SourceName: modSource });
       handleCloseEdit();
     } catch (err) {
       setError(err.message);
@@ -128,6 +127,7 @@ const SourceSettings = (props) => {
     } finally {
       setLoading(false);
     }
+    setResponseShow(true);
   }
 
   const showEdit = () => {

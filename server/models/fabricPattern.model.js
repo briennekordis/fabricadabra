@@ -20,7 +20,8 @@ FabricPattern.create = (newFabricPattern, result) => {
   FabricPattern.getAll = (result) => {
     let query = 
         "SELECT * " +
-        "FROM FabricPatterns;" 
+        "FROM FabricPatterns " +
+        "ORDER BY PatternDesc;" 
     sql.query(query, (err, res) => {
         if (err) {
             console.log("Error: ", err);

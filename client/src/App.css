@@ -21,69 +21,12 @@ height: auto;;
   margin-left: 5px;
 }
 
-#yardage, #width {
-  width: 100px;
-  display: inline-flex;
-  padding: 10px;
-  margin: 10px;
-}
-
-#yardageCol, #widthCol {
-  width: 100px;
-}
-
-.form-check-input:checked {
-  background-color: rgba(132, 140, 182, 0.678) !important;
-  border-color:rgba(132, 140, 182, 0.678) !important;
-}
-
- #checkbox {
-  padding-left: 30px;
-  margin: 20px;
-} 
-
-button:hover {
-  cursor: pointer;
-}
-
-.card {
-  width: 400px;
-  background-color: lightgray;
-}
-
-#detailsForm {
-  padding: 10px;
-  columns: 2;
-}
-
-#detailsForm span {
-  font-weight: bold;
-}
-
-#detailsForm p {
-  width: auto;
-}
-
-#details-scrap-checkbox {
-  padding: 10px;
-  margin-left: 10px;
-  margin-top: 2px;;
-}
-
 .hidden {
   display: none;
 }
 
-#stashOps {
-  margin-bottom: 50px;
-}
-
-#stashTable {
-  margin: 10px;
-}
-
-#addFabricIcon {
-  float: right;
+button:hover {
+  cursor: pointer;
 }
 
 #deleteButton {
@@ -101,3 +44,76 @@ button:hover {
   border-color: rgb(106, 106, 175);
   color: white;
 }
+
+ #checkbox {
+  padding-left: 30px;
+  margin: 20px;
+} 
+
+.form-check-input:checked {
+  background-color: rgba(132, 140, 182, 0.678) !important;
+  border-color:rgba(132, 140, 182, 0.678) !important;
+}
+
+.card {
+  width: 400px;
+  background-color: lightgray;
+}
+
+#stashOps {
+  margin-bottom: 50px;
+}
+
+#addFabricIcon {
+  float: right;
+  margin-right: 20px;
+}
+
+#stashTable {
+  margin: 10px;
+}
+
+#yardageCol, #widthCol {
+  width: 100px;
+}
+
+#detailsModal {
+  padding: 10px;
+  columns: 2;
+}
+
+#detailsModal span {
+  font-weight: bold;
+}
+
+#detailsModal p {
+  width: auto;
+}
+
+#details-scrap-checkbox, #formScrapStatus {
+  padding: 10px;
+  margin-left: 10px;
+  margin-top: 2px;;
+}
+
+#editFabricForm, #addFabricForm {
+  margin: 10px;
+}
+
+#editFabricForm, #addFabricForm label {
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 2px;;
+}
+#editFabricForm, #addFabricForm input {
+  margin-top: 2px;
+  margin-bottom: 10px;
+}
+
+#formYardage, #formWidth {
+  width: 100px;
+  display: inline-flex;
+  padding: 10px;
+  margin: 10px;
+}
+
