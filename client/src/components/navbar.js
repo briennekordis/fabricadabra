@@ -15,10 +15,10 @@ function NavBar() {
                         <Link to={"/add"} className="nav-link">Add to My Stash</Link>
                     </li>
                     <li className="nav-item">
-                        <Link to={"/stats"} className="nav-link">Stash Stats</Link>
+                        <Link to={"/stats"} className="nav-link disabled">Stash Stats</Link>
                     </li>
                     <li className="nav-item">
-                        <Link to={"/projects"} className="nav-link">Project Planner</Link>
+                        <Link to={"/projects"} className="nav-link disabled">Project Planner</Link>
                     </li>
                     <li className="nav-item">
                         <Link to={"/settings"} className="nav-link">Settings</Link>

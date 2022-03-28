@@ -4,7 +4,7 @@ import logo from "../images/logo.png";
 
 function Home() {
     return (          
-          <body id="home" className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+          <div id="home" className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
                   <main className="px-3">
                       <h1>Welcome to Fabricadabra</h1>
                       <p className="lead">A magical place to keep a sewist's stash organized</p>
@@ -12,7 +12,7 @@ function Home() {
                           <img src={logo} id="logo"></img>
                       </div>
                   </main>
-          </body>
+          </div>
       );
     }
     

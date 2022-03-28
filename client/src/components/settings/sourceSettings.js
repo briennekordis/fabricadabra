@@ -15,15 +15,26 @@ const SourceSettings = (props) => {
   const [warningShow, setWarningShow] = useState(false);
   const [editShow, setEditShow] = useState(false);
   const [modalInfo, setModalInfo] = useState([]);
+  const [addShow, setAddShow] = useState(false);
+  const [responseShow, setResponseShow] = useState(false);
+
   const handleCloseDetails = () => setDetailsShow(false);
   const handleCloseWarning = () => {
     setWarningShow(false);
-    props.handleClose();
+    setResponseShow(true);
   }
   const handleCloseEdit = () => {
     setEditShow(false);
+    setResponseShow(true);
+  }
+  const handleCloseAdd = () => {
+    setAddShow(false);
+  }
+  const handleCloseResponse = () => {
+    setResponseShow(false);
     props.handleClose();
   }
+
 
   // Get sources by id
   const showDetails = async (id) => {
@@ -73,14 +84,13 @@ const SourceSettings = (props) => {
   const deleteSource = async (id) => {
     try {
       const response = await SettingsDataService.removeSource(id);
-      console.log(response);
+      handleCloseWarning();
     } catch (err) {
       setError(err.message);
       setSources(null);
     } finally {
       setLoading(false);
     }
-    handleCloseWarning();
   }
 
   const showWarning = () => {
@@ -105,6 +115,7 @@ const SourceSettings = (props) => {
       </Modal>
     );
   }
+
 
   // Update source by id
   const editSource = async (id, newSource) => {
@@ -146,11 +157,66 @@ const SourceSettings = (props) => {
     );
   }
 
+  // Add source
+  const showAdd = () => {
+    setAddShow(true);
+  }
+
+  const addSource = async (newId, newSource) => {
+    try {
+      const response = await SettingsDataService.createSource({ "FabricSourceId": newId, "SourceName": newSource});
+      handleCloseAdd();
+    } catch (err) {
+      setError(err.message);
+      setSource(null);
+    } finally {
+      setLoading(false);
+    }
+    setResponseShow(true);
+  }
+
+  const AddModal = () => {
+    return (
+      <Modal show={addShow} onHide={function () { handleCloseAdd() }}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add Fabric Source</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <form id="addSourceModal">
+            <div className="form-group">
+              <label>Fabric Source:</label>
+              <input type="text" className="form-control" id="fabricSourceAdd" placeholder="Fabric Source Name"/>
+            </div>
+          </form>
+        </Modal.Body>
+        <Modal.Footer>
+        <Button id="closeButton" onClick={function () { handleCloseAdd() }}>Cancel</Button>
+          <Button id="confirmButton" onClick={function () { addSource(modalInfo.FabricSourceId, document.getElementById("fabricSourceAdd").value) }}>Save changes</Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  }
+
+  const ResponseModal = () => {
+    return (
+      <Modal show={responseShow} onHide={function () { handleCloseResponse() }}>
+        <Modal.Header closeButton>
+          <Modal.Title>Response</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p></p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button id="closeButton" onClick={function () { handleCloseResponse() }}>Close</Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  }
 
   return (
     <div>
       <div id="settingsAddIcon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-plus-square-fill" viewBox="0 0 16 16" type="button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-plus-square-fill" viewBox="0 0 16 16" type="button" onClick={() => {showAdd()}}>
           <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z" />
         </svg>
       </div>
@@ -166,7 +232,12 @@ const SourceSettings = (props) => {
       <div>
         {editShow ? <EditModal /> : null}
       </div>
-
+      <div>
+        {addShow ? <AddModal /> : null}
+      </div>
+      <div>
+        {responseShow ? <ResponseModal /> : null}
+      </div>
     </div>
   );
 }

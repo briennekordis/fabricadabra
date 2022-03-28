@@ -14,19 +14,24 @@ const TypeSettings = (props) => {
   const [detailsShow, setDetailsShow] = useState(false);
   const [warningShow, setWarningShow] = useState(false);
   const [editShow, setEditShow] = useState(false);
-  // const [addShow, setAddShow] = useState(false);
-  const handleCloseDetails = () => setDetailsShow(false);
+  const [addShow, setAddShow] = useState(false);
+  const [responseShow, setResponseShow] = useState(false);
 
+  const handleCloseDetails = () => setDetailsShow(false);
   const handleCloseWarning = () => {
     setWarningShow(false);
-    props.handleClose();
+    setResponseShow(true);
   }
   const handleCloseEdit = () => {
     setEditShow(false);
-    props.handleClose();
   }
-  // const handleCloseAdd = () => setAddShow(false);
-
+  const handleCloseAdd = () => {
+    setAddShow(false);
+  }
+  const handleCloseResponse = () => {
+    setResponseShow(false);
+    props.handleClose();
+  }  
 
   // Get type by id
   const showDetails = async (id) => {
@@ -119,6 +124,7 @@ const TypeSettings = (props) => {
     } finally {
       setLoading(false);
     }
+    setResponseShow(true);
   }
 
   const showEdit = () => {
@@ -149,48 +155,66 @@ const TypeSettings = (props) => {
   }
 
   // Add type
+  const showAdd = () => {
+    setAddShow(true);
+  }
 
-  // const showAdd = () => {
-  //   setAddShow(true);
-  // }
+  const addType = async (newId, newType) => {
+    try {
+      const response = await SettingsDataService.createType({ "FabricTypeId": newId, "FabricType": newType });
+      handleCloseAdd();
+    } catch (err) {
+      setError(err.message);
+      setTypes(null);
+    } finally {
+      setLoading(false);
+    }
+    setResponseShow(true);
+  }
 
-  // const addType = async () => {
-  //   try {
-  //     const response = await SettingsDataService.createType();
-  //   } catch (err) {
-  //     setError(err.message);
-  //     setTypes(null);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // }
+  const AddModal = () => {
+    return (
+      <Modal show={addShow} onHide={function () { handleCloseAdd() }}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add Fabric Type</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <form id="addTypeModal">
+            <div className="form-group">
+              <label>Fabric Type:</label>
+              <input type="text" className="form-control" id="fabricTypeAdd" placeholder="Fabric Type Name"/>
+            </div>
+          </form>
+        </Modal.Body>
+        <Modal.Footer>
+        <Button id="closeButton" onClick={function () { handleCloseAdd() }}>Cancel</Button>
+          <Button id="confirmButton" onClick={function () { addType(modalInfo.FabricTypeId, document.getElementById("fabricTypeAdd").value) }}>Save changes</Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  }
 
-  // const AddModal = () => {
-  //   return (
-  //     <Modal show={addShow} onHide={function () { handleCloseAdd() }}>
-  //       <Modal.Header closeButton>
-  //         <Modal.Title>Add Fabric Type</Modal.Title>
-  //       </Modal.Header>
-  //       <Modal.Body>
-  //         <form id="detailsForm">
-  //           <div className="form-group">
-  //             <label>Fabric Type:</label>
-  //             <input type="text" className="form-control" placeholder="Fabric Type Name" onChange={handleInputChange} />
-  //           </div>
-  //         </form>
-  //       </Modal.Body>
-  //       <Modal.Footer>
-  //         <Button id="closeButton" onClick={function () { handleCloseAdd() }}>Cancel</Button>
-  //         <Button id="confirmButton" onClick={function () { addType() }}>Add Type</Button>
-  //       </Modal.Footer>
-  //     </Modal>
-  //   );
-  // }
+  const ResponseModal = () => {
+    return (
+      <Modal show={responseShow} onHide={function () { handleCloseResponse() }}>
+        <Modal.Header closeButton>
+          <Modal.Title>Response</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p></p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button id="closeButton" onClick={function () { handleCloseResponse() }}>Close</Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  }
+
 
   return (
     <div>
       <div id="settingsAddIcon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-plus-square-fill" viewBox="0 0 16 16" type="button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-plus-square-fill" viewBox="0 0 16 16" type="button" onClick={() => {showAdd()}}>
           <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z" />
         </svg>
       </div>
@@ -207,7 +231,10 @@ const TypeSettings = (props) => {
         {editShow ? <EditModal /> : null}
       </div>
       <div>
-        {/* {addShow ? <AddModal /> : null} */}
+        {addShow ? <AddModal /> : null}
+      </div>
+      <div>
+        {responseShow ? <ResponseModal /> : null}
       </div>
     </div>
 
