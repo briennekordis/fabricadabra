@@ -18,6 +18,7 @@ function ViewStash() {
   const [editShow, setEditShow] = useState(false);
   const [addShow, setAddShow] = useState(false);
   const [responseShow, setResponseShow] = useState(false);
+  const [responseContent, setResponseContent] = useState({});
   const [modalInfo, setModalInfo] = useState([]);
   const widthFormat = new Intl.NumberFormat({ maximumFractionDigits: 0 });
 
@@ -45,7 +46,6 @@ function ViewStash() {
   }
 
   const buildFabric = (id) => {
-    let projectId = parseInt(document.getElementById("formProjectId").value);
     return {
       FabricId: parseInt(id),
       FabricTypeId: parseInt(document.getElementById("formFabricTypeId").value),
@@ -55,11 +55,10 @@ function ViewStash() {
       Width: parseFloat(document.getElementById("formWidth").value),
       FabricSourceId: parseInt(document.getElementById("formFabricSourceId").value),
       ScrapStatus: document.getElementById("formScrapStatus").checked,
-      ProjectId: projectId === 0 ? null : projectId
     }
   }
 
-  // Get all fabric
+  // Get all fabric 
   const getStash = async () => {
     try {
       const response = await FabricDataService.getAll();
@@ -142,7 +141,6 @@ function ViewStash() {
               <p><span>Yardage: </span> {modalInfo.Yardage}</p>
               <p><span>Width: </span>{widthFormat.format(modalInfo.Width)}"</p>
               <p><span>Source: </span>{modalInfo.SourceName}</p>
-              <p><span>Intended Project: </span>{modalInfo.ProjectName}</p>
               <p><span>Scrap: </span><input type="checkbox" readOnly className="form-check-input" id="details-scrap-checkbox" checked={modalInfo.ScrapStatus} /></p>
             </div>
           </form>
@@ -227,14 +225,14 @@ function ViewStash() {
               <label>Fabric Type:</label>
               <select className="form-select" id="formFabricTypeId" defaultValue={modalInfo.FabricTypeId}>{types.map(type => (
                 <option key={type.FabricTypeId} value={type.FabricTypeId}>{type.FabricType}</option>
-                ))}
+              ))}
               </select>
               <label>Color(s):</label>
               <input className="form-control" defaultValue={modalInfo.Color} id="formColor" />
               <label>Pattern:</label>
               <select className="form-select" id="formPatternId" defaultValue={modalInfo.PatternId}>{patterns.map(pattern => (
                 <option key={pattern.PatternId} value={pattern.PatternId}>{pattern.PatternDesc}</option>
-                ))}
+              ))}
               </select>
               <label>Yardage:</label>
               <input className="form-control" defaultValue={modalInfo.Yardage} id="formYardage" />
@@ -244,10 +242,8 @@ function ViewStash() {
               <label>Source:</label>
               <select className="form-select" id="formFabricSourceId" defaultValue={modalInfo.FabricSourceId}>{sources.map(source => (
                 <option key={source.FabricSourceId} value={source.FabricSourceId}>{source.SourceName}</option>
-                ))}
+              ))}
               </select>
-              <label>Intended Project:</label>
-              <input className="form-control" defaultValue={modalInfo.ProjectName} id="formProjectId" />
               <br />
               <div className="form-check">
                 <label>Scrap:</label>
@@ -269,17 +265,22 @@ function ViewStash() {
     setAddShow(true);
   }
 
-  const addFabric = async (id) => {
+  const addFabric = async () => {
     const fabricBuild = buildFabric(0);
-    try {
-      const response = await FabricDataService.createFabric(id, fabricBuild);
-      console.log(fabricBuild);
+    const response = await FabricDataService.create(fabricBuild);
+    console.log(response);
+    if (response.data.success) {
+      setResponseContent({
+        title: "Success",
+        body: "Fabric was successfully added"
+      });
       handleCloseAdd();
-    } catch (err) {
-      setError(err.message);
-      setFabric(null);
-    } finally {
-      setLoading(false);
+    } else {
+      setResponseContent({
+        title: "There was a problem processing the request",
+        status: `${response.data.errno}: ${response.data.code}`,
+        body: response.data.message
+      });
     }
     setResponseShow(true);
   }
@@ -296,14 +297,14 @@ function ViewStash() {
               <label>Fabric Type:</label>
               <select className="form-select" id="formFabricTypeId" placeholder="Select...">{types.map(type => (
                 <option key={type.FabricTypeId} value={type.FabricTypeId}>{type.FabricType}</option>
-                ))}
+              ))}
               </select>
               <label>Color(s):</label>
               <input className="form-control" id="formColor" />
               <label>Pattern:</label>
               <select className="form-select" id="formPatternId">{patterns.map(pattern => (
                 <option key={pattern.PatternId} value={pattern.PatternId}>{pattern.PatternDesc}</option>
-                ))}
+              ))}
               </select>
               <label>Yardage:</label>
               <input className="form-control" id="formYardage" />
@@ -313,10 +314,8 @@ function ViewStash() {
               <label>Source:</label>
               <select className="form-select" id="formFabricSourceId">{sources.map(source => (
                 <option key={source.FabricSourceId} value={source.FabricSourceId}>{source.SourceName}</option>
-                ))}
+              ))}
               </select>
-              <label>Intended Project:</label>
-              <input className="form-control" id="formProjectId" />
               <br />
               <div className="form-check">
                 <label>Scrap:</label>
@@ -337,13 +336,14 @@ function ViewStash() {
     return (
       <Modal show={responseShow} onHide={function () { handleCloseResponse() }}>
         <Modal.Header closeButton>
-          <Modal.Title>Response</Modal.Title>
+          <Modal.Title>{responseContent.title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p></p>
+          <h4>{responseContent.status}</h4>
+          <p>{responseContent.body}</p>
         </Modal.Body>
         <Modal.Footer>
-          <Button id="closeButton" onClick={function () { handleCloseResponse() }}>Close</Button>
+          <Button id="closeButton" onClick={function () { handleCloseResponse() }}>OK</Button>
         </Modal.Footer>
       </Modal>
     );

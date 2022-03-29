@@ -14,14 +14,17 @@ exports.create = (req, res) => {
         Width: req.body.Width,
         FabricSourceId: req.body.FabricSourceId,
         ScrapStatus: req.body.ScrapStatus,
-        ProjectId: req.body.ProjectId
     });
     Fabric.create(fabric, (err, data) => {
-        if (err)
-          res.status(500).send({
-            message:
-              err.message || "A problem occurred while creating the fabric."
-        });
+        if (err) {
+          console.log(err.sqlMessage);
+          res.send({
+            success: false,
+            code: err.code,
+            errno: err.errno,
+            message: err.sqlMessage
+          });
+        }
         else res.send(data);
     });
 };
