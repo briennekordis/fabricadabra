@@ -24,7 +24,7 @@ This project is a personal project of the owner to organize their sizable fabric
 
 ## Features
 This application applies the CRUD (Create, Read, Update, Delete) methods to data that stores information about different fabrics, such as color and pattern. 
-- On the "View My Stash" page, the user is able to see a table of data (fabrics) that has been retrieved from the database. 
+- On the "My Stash" page, the user is able to see a table of data (fabrics) that has been retrieved from the database. 
 
 ![viewStash](https://user-images.githubusercontent.com/87245718/160255940-4f492aac-2f66-464e-a8d4-3fff07dfc451.png)
 
@@ -35,9 +35,10 @@ This application applies the CRUD (Create, Read, Update, Delete) methods to data
 ![fabricDetails](https://user-images.githubusercontent.com/87245718/160255810-e72d701d-3969-4f39-bd6a-8e985d96df67.png)
 
 
-- From the "Add to My Stash" page, the user is able to create a new fabric object that will be added to the database. 
+- From the "My Stash" page, the user is able to click a Bootstrap icon at the top of the page that opens up a modal to create a new fabric, complete with drop down lists of the setting options, that will be added to the database and then displayed in the stash table. 
 
-![addFabric](https://user-images.githubusercontent.com/87245718/160255815-68fa1e31-803f-4d11-8f99-5c585b2107ee.png)
+![add fabric modal](https://user-images.githubusercontent.com/87245718/160691870-bfb14a9f-230f-4787-8d39-20f6fec14ae5.png)
+
 
 - On the "Settings" page, there are collapsible components that display retrieved data from the database and allow users to view, edit, delete, and create new "settings" options (i.e. rows in data columns). 
 
@@ -49,7 +50,7 @@ This application applies the CRUD (Create, Read, Update, Delete) methods to data
 
 ## Future Improvements
 This project is still in progress and has additional functionality planned, such as:
-- On the "View My Stash" page, search bars and filters will be added to improve the user's ability to sort through their stash.
+- On the "My Stash" page, search bars and filters will be added to improve the user's ability to sort through their stash.
 - A "Stash Stats" page that will provide a summery of the user's data, such as how many total yards of fabric in their stash. 
 - A "Project Planner" that will allow users to plot out their project plans, assign fabrics to be used for different projects, 
 and mark projects as complete which will then deduct the amount of fabric used from the stash. 
