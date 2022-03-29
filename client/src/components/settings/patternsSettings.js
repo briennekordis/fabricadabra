@@ -203,7 +203,7 @@ const PatternSettings = (props) => {
         </Modal.Body>
         <Modal.Footer>
           <Button id="closeButton" onClick={function () { handleCloseAdd() }}>Cancel</Button>
-          <Button id="confirmButton" onClick={function () { addPattern(modalInfo.PatternId, document.getElementById("fabricPatternAdd").value) }}>Save changes</Button>
+          <Button id="confirmButton" onClick={function () { addPattern(modalInfo.PatternId, document.getElementById("fabricPatternAdd").value) }}>Add</Button>
         </Modal.Footer>
       </Modal>
     );
@@ -212,9 +212,7 @@ const PatternSettings = (props) => {
   return (
     <div>
       <div id="settingsAddIcon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-plus-square-fill" viewBox="0 0 16 16" type="button" onClick={() => {showAdd()}}>
-          <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z" />
-        </svg>
+        <i className="bi bi-plus-square-fill" id="settingsAddIcon" type="button" onClick={() => {showAdd()}}></i>  
       </div>
       <div className="patternsContainer">
         {props.data.map(pattern => <FabricPatterns key={pattern.PatternId} pattern={pattern} />)}

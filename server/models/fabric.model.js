@@ -52,7 +52,7 @@ Fabric.getById = (id, result) => {
         "INNER JOIN FabricPatterns p " +
         "ON f.PatternId = p.PatternId " +
         "INNER JOIN FabricSources s " +
-        "ON f.FabricSourceId = s.FabricSourceId;";
+        "ON f.FabricSourceId = s.FabricSourceId ";
     query += `WHERE FabricId = ${id};`
 
     sql.query(query, (err, res) => {
