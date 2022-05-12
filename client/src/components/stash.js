@@ -4,7 +4,7 @@ import { Modal, Button } from "react-bootstrap";
 import FabricDataService from "../services/fabricServices";
 import SettingsDataService from "../services/settingServices";
 
-function ViewStash() {
+function Stash() {
   let details = {};
   const [stash, setStash] = useState([]);
   const [types, setTypes] = useState([]);
@@ -364,7 +364,7 @@ function ViewStash() {
   return (
     <>
       <div id="stashOps">
-        <i className="bi bi-plus-square-fill" id="addFabricIcon" type="button" onClick={() => {showAdd()}}></i>  
+        <i className="bi bi-plus-square-fill" id="addFabricIcon" type="button" onClick={() => { showAdd() }}></i>
       </div>
       <div id="stashTable">
         <table className="table table-bordered table-striped" id="fabricTable">
@@ -402,4 +402,4 @@ function ViewStash() {
   );
 }
 
-export default ViewStash;
+export default Stash;

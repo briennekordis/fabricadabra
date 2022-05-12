@@ -12,7 +12,7 @@ function NavBar() {
                         <Link to={"/fabrics"} className="nav-link">My Stash</Link>
                     </li>
                     <li className="nav-item">
-                        <Link to={"/stats"} className="nav-link disabled">Stash Stats</Link>
+                        <Link to={"/stats"} className="nav-link">Stash Stats</Link>
                     </li>
                     <li className="nav-item">
                         <Link to={"/projects"} className="nav-link disabled">Project Planner</Link>

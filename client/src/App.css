@@ -118,3 +118,7 @@ button:hover {
   margin: 10px;
 }
 
+
+#statsTable {
+  width: 40%;
+}
