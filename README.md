@@ -8,7 +8,7 @@ Fabricadabra
 - [Future Improvements](https://github.com/briennekordis/fabricadabra#future-improvements)
 
 ## Description & General Info
-This project is a personal project of the owner to organize their sizable fabric stash.
+This project is a personal project of the owner to organize their fabric stash.
 
 ![fabHome](https://user-images.githubusercontent.com/87245718/160255826-a28f14a5-a10e-4361-b30a-aa05d009635d.png)
 
